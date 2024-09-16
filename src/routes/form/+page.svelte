@@ -6,11 +6,6 @@
 	import RadioButton from '../../components/RadioButton.svelte';
 	import Select from '../../components/Select.svelte';
 	import TextArea from '../../components/TextArea.svelte';
-    // import TextInput from '$lib/components/TextInput.svelte';
-    // import Checkbox from '$lib/components/Checkbox.svelte';
-    // import RadioButton from '$lib/components/RadioButton.svelte';
-    // import Select from '$lib/components/Select.svelte';
-    // import TextArea from '$lib/components/TextArea.svelte';
   
     interface FormData {
       name: string;
