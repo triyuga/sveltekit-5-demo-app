@@ -1,0 +1,10 @@
+{
+    "workbench.editor.customLabels.patterns": {
+        "**/+layout.*": "${dirname}/${filename}.${extname}",
+        "**/+page.*": "${dirname}/${filename}.${extname}",
+        "**/+server.*": "${dirname}/${filename}.${extname}",
+        "**/routes/+layout.*": "home/${filename}.${extname}",
+        "**/routes/+page.*": "home/${filename}.${extname}",
+        "**/routes/+server.*": "home/${filename}.${extname}",
+    },
+}
