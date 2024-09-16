@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { browser } from '$app/environment';
     import { onMount } from 'svelte';
     import { writable } from 'svelte/store';
     import TextInput from '../../components/TextInput.svelte';
@@ -28,21 +29,38 @@
     };
   
     const formData = writable<FormData>({ ...defaultFormData });
-  
+
     // Load form data from local storage on mount
     onMount(() => {
-      const storedData = localStorage.getItem('formData');
+      const storedData = browser ? localStorage.getItem('formData') : null;
       if (storedData) {
+        console.log('Hydrating form data to local storage:', storedData);
         formData.set(JSON.parse(storedData));
       }
     });
   
     // Save form data to local storage on change
     formData.subscribe((data) => {
-      // localStorage.setItem('formData', JSON.stringify(data));
+            
+      if (browser) {
+        console.log('Saving form data to local storage:', data);
+        const dataString = JSON.stringify(data);
+        const defaultDataString = JSON.stringify(defaultFormData);
+        const previousDataString = browser ? localStorage.getItem('formData') : '';
+        if (![defaultDataString, previousDataString].includes(dataString)) {
+          localStorage.setItem('formData', JSON.stringify(data));
+        }
+      }
     });
-  
+    
+    function handleReset(event: any) {
+      console.log('handleReset', event);
+      formData.set({ ...defaultFormData });
+      localStorage.removeItem('formData');
+    }
+
     function handleChange(event: any) {
+      console.log('handleChange', event);
       const { name, value, checked } = event.detail;
       formData.update((data) => ({
         ...data,
@@ -62,7 +80,7 @@
         value={$formData.name}
         on:change={handleChange}
       />
-  
+
       <!-- Email -->
       <TextInput
         label="Email"
@@ -70,7 +88,7 @@
         value={$formData.email}
         on:change={handleChange}
       />
-  
+
       <!-- Password -->
       <TextInput
         label="Password"
@@ -78,7 +96,7 @@
         value={$formData.password}
         on:change={handleChange}
       />
-  
+
       <!-- Gender -->
       <fieldset>
         <legend>Gender</legend>
@@ -104,7 +122,7 @@
           on:change={handleChange}
         />
       </fieldset>
-  
+
       <!-- Country -->
       <Select
         label="Country"
@@ -119,7 +137,7 @@
         selectedValue={$formData.country}
         on:change={handleChange}
       />
-  
+
       <!-- Bio -->
       <TextArea
         label="Bio"
@@ -135,9 +153,14 @@
         checked={$formData.acceptTerms}
         on:change={handleChange}
       />
-  
-      <!-- Submit Button -->
-      <button type="submit">Submit</button>
+
+
+      <div class="buttons">
+        <!-- Reset Button -->
+        <button type="button" on:click={handleReset}>Reset</button>
+        <!-- Submit Button -->
+        <button type="submit">Submit</button>
+      </div>
     {/if}
   </form>
   
@@ -168,5 +191,12 @@
     button[type="submit"] {
       align-self: flex-start;
       padding: 0.5rem 1rem;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      justify-content: space-between;
     }
   </style>
