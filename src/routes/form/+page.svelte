@@ -1,12 +1,12 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     import { writable } from 'svelte/store';
-	import TextInput from '../../components/TextInput.svelte';
-	import Checkbox from '../../components/Checkbox.svelte';
-	import RadioButton from '../../components/RadioButton.svelte';
-	import Select from '../../components/Select.svelte';
-	import TextArea from '../../components/TextArea.svelte';
-  
+    import TextInput from '../../components/TextInput.svelte';
+    import Checkbox from '../../components/Checkbox.svelte';
+    import RadioButton from '../../components/RadioButton.svelte';
+    import Select from '../../components/Select.svelte';
+    import TextArea from '../../components/TextArea.svelte';
+    
     interface FormData {
       name: string;
       email: string;
@@ -39,7 +39,7 @@
   
     // Save form data to local storage on change
     formData.subscribe((data) => {
-      localStorage.setItem('formData', JSON.stringify(data));
+      // localStorage.setItem('formData', JSON.stringify(data));
     });
   
     function handleChange(event: any) {
@@ -76,14 +76,6 @@
         label="Password"
         name="password"
         value={$formData.password}
-        on:change={handleChange}
-      />
-  
-      <!-- Accept Terms -->
-      <Checkbox
-        label="Accept Terms and Conditions"
-        name="acceptTerms"
-        checked={$formData.acceptTerms}
         on:change={handleChange}
       />
   
@@ -135,6 +127,14 @@
         value={$formData.bio}
         on:change={handleChange}
       />
+
+      <!-- Accept Terms -->
+      <Checkbox
+        label="Accept Terms and Conditions"
+        name="acceptTerms"
+        checked={$formData.acceptTerms}
+        on:change={handleChange}
+      />
   
       <!-- Submit Button -->
       <button type="submit">Submit</button>
@@ -144,3 +144,29 @@
   <!-- Display Form Data -->
   <pre>{JSON.stringify($formData, null, 2)}</pre>
   
+
+  <style>
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  
+    fieldset {
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    legend {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+  
+    button[type="submit"] {
+      align-self: flex-start;
+      padding: 0.5rem 1rem;
+    }
+  </style>
