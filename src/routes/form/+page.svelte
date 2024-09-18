@@ -29,24 +29,24 @@
     // Declare state (rune)
     let formData = $state<FormData>({ ...defaultFormData });
     
+    // $derived state (rune)
+    const formDataString = $derived<string>(JSON.stringify(formData));
+    
     // onMount $effect (rune)
     $effect(() => {
       // Load form data from local storage on mount
       const storedData = browser ? localStorage.getItem('formData') : null;
       if (storedData) {
-        console.log('Hydrating form data to local storage:', storedData);
         formData = JSON.parse(storedData);
       }
     });
   
     function handleReset(event: any) {
-      console.log('handleReset', event);
       formData = { ...defaultFormData };
       localStorage.removeItem('formData');
     }
 
     function handleChange(event: any) {
-      console.log('handleChange', event);
       const { name, value, checked } = event.detail;
       formData = {
         ...formData,
@@ -55,8 +55,6 @@
 
       // Persist form data to local storage 
       if (browser) {
-        // console.log('Saving form data to local storage:', data);
-        const formDataString = JSON.stringify(formData);
         const defaultFormDataString = JSON.stringify(defaultFormData);
         const previousFormDataString = browser ? localStorage.getItem('formData') : '';
         if (![defaultFormDataString, previousFormDataString].includes(formDataString)) {
