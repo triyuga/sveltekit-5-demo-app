@@ -1,18 +1,22 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
-  export let label: string = '';
-  export let value: string = '';
-  export let name: string = '';
-  const dispatch = createEventDispatcher();
+  interface TextInputProps {
+    label: string;
+    value: string;
+    name: string;
+    onChange: (value: string) => void;
+  }
+
+  let {label = '', value = '', name = '', onChange}: TextInputProps = $props();
 
   function handleInput(event: Event) {
-    dispatch('change', { name, value: (event.target as HTMLInputElement).value });
+    const value = (event.target as HTMLInputElement).value
+    onChange(value)
   }
 </script>
 
 <label>
   {label}
-  <input type="text" bind:value on:input={handleInput} />
+  <input name={name} type="text" bind:value oninput={handleInput} />
 </label>
 
 <style>
