@@ -40,6 +40,18 @@
         formData = JSON.parse(storedData);
       }
     });
+
+    // $effect - when formDataString changes, persist form data to local storage
+    $effect(() => {
+      if (browser) {
+        const defaultFormDataString = JSON.stringify(defaultFormData);
+        const previousFormDataString = browser ? localStorage.getItem('formData') : '';
+        if (![defaultFormDataString, previousFormDataString].includes(formDataString)) {
+          console.log('persisting form data to local storage');
+          localStorage.setItem('formData', formDataString);
+        }
+      }
+    });
   
     function handleReset(event: any) {
       formData = { ...defaultFormData };
@@ -52,15 +64,6 @@
         ...formData,
         [name]: value !== undefined ? value : checked
       };
-
-      // Persist form data to local storage 
-      if (browser) {
-        const defaultFormDataString = JSON.stringify(defaultFormData);
-        const previousFormDataString = browser ? localStorage.getItem('formData') : '';
-        if (![defaultFormDataString, previousFormDataString].includes(formDataString)) {
-          localStorage.setItem('formData', formDataString);
-        }
-      }
     }
   </script>
   
