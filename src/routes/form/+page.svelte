@@ -1,7 +1,6 @@
 <script lang="ts">
     import { browser } from '$app/environment';
     import { onMount } from 'svelte';
-    import { writable } from 'svelte/store';
     import TextInput from '../../components/TextInput.svelte';
     import Checkbox from '../../components/Checkbox.svelte';
     import RadioButton from '../../components/RadioButton.svelte';
@@ -27,57 +26,54 @@
       country: '',
       bio: ''
     };
-  
-    const formData = writable<FormData>({ ...defaultFormData });
-
+    
+    let formData = $state<FormData>({ ...defaultFormData });
+      
     // Load form data from local storage on mount
     onMount(() => {
       const storedData = browser ? localStorage.getItem('formData') : null;
       if (storedData) {
         console.log('Hydrating form data to local storage:', storedData);
-        formData.set(JSON.parse(storedData));
+        formData = JSON.parse(storedData);
       }
     });
   
-    // Save form data to local storage on change
-    formData.subscribe((data) => {
-            
-      if (browser) {
-        console.log('Saving form data to local storage:', data);
-        const dataString = JSON.stringify(data);
-        const defaultDataString = JSON.stringify(defaultFormData);
-        const previousDataString = browser ? localStorage.getItem('formData') : '';
-        if (![defaultDataString, previousDataString].includes(dataString)) {
-          localStorage.setItem('formData', JSON.stringify(data));
-        }
-      }
-    });
-    
     function handleReset(event: any) {
       console.log('handleReset', event);
-      formData.set({ ...defaultFormData });
+      formData = { ...defaultFormData };
       localStorage.removeItem('formData');
     }
 
     function handleChange(event: any) {
       console.log('handleChange', event);
       const { name, value, checked } = event.detail;
-      formData.update((data) => ({
-        ...data,
+      formData = {
+        ...formData,
         [name]: value !== undefined ? value : checked
-      }));
+      };
+
+      // Persist form data to local storage 
+      if (browser) {
+        // console.log('Saving form data to local storage:', data);
+        const formDataString = JSON.stringify(formData);
+        const defaultFormDataString = JSON.stringify(defaultFormData);
+        const previousFormDataString = browser ? localStorage.getItem('formData') : '';
+        if (![defaultFormDataString, previousFormDataString].includes(formDataString)) {
+          localStorage.setItem('formData', formDataString);
+        }
+      }
     }
   </script>
   
   <h1>Example Form</h1>
   
   <form on:submit|preventDefault>
-    {#if $formData}
+    {#if formData}
       <!-- Name -->
       <TextInput
         label="Name"
         name="name"
-        value={$formData.name}
+        value={formData.name}
         on:change={handleChange}
       />
 
@@ -85,7 +81,7 @@
       <TextInput
         label="Email"
         name="email"
-        value={$formData.email}
+        value={formData.email}
         on:change={handleChange}
       />
 
@@ -93,7 +89,7 @@
       <TextInput
         label="Password"
         name="password"
-        value={$formData.password}
+        value={formData.password}
         on:change={handleChange}
       />
 
@@ -104,21 +100,21 @@
           label="Male"
           name="gender"
           value="male"
-          groupValue={$formData.gender}
+          groupValue={formData.gender}
           on:change={handleChange}
         />
         <RadioButton
           label="Female"
           name="gender"
           value="female"
-          groupValue={$formData.gender}
+          groupValue={formData.gender}
           on:change={handleChange}
         />
         <RadioButton
           label="Other"
           name="gender"
           value="other"
-          groupValue={$formData.gender}
+          groupValue={formData.gender}
           on:change={handleChange}
         />
       </fieldset>
@@ -134,7 +130,7 @@
           { value: 'uk', text: 'United Kingdom' },
           { value: 'au', text: 'Australia' }
         ]}
-        selectedValue={$formData.country}
+        selectedValue={formData.country}
         on:change={handleChange}
       />
 
@@ -142,7 +138,7 @@
       <TextArea
         label="Bio"
         name="bio"
-        value={$formData.bio}
+        value={formData.bio}
         on:change={handleChange}
       />
 
@@ -150,7 +146,7 @@
       <Checkbox
         label="Accept Terms and Conditions"
         name="acceptTerms"
-        checked={$formData.acceptTerms}
+        checked={formData.acceptTerms}
         on:change={handleChange}
       />
 
@@ -165,7 +161,7 @@
   </form>
   
   <!-- Display Form Data -->
-  <pre>{JSON.stringify($formData, null, 2)}</pre>
+  <pre>{JSON.stringify(formData, null, 2)}</pre>
   
 
   <style>
