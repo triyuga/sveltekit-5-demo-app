@@ -1,6 +1,5 @@
 <script lang="ts">
     import { browser } from '$app/environment';
-    import { onMount } from 'svelte';
     import TextInput from '../../components/TextInput.svelte';
     import Checkbox from '../../components/Checkbox.svelte';
     import RadioButton from '../../components/RadioButton.svelte';
@@ -27,10 +26,12 @@
       bio: ''
     };
     
+    // Declare state (rune)
     let formData = $state<FormData>({ ...defaultFormData });
-      
-    // Load form data from local storage on mount
-    onMount(() => {
+    
+    // onMount $effect (rune)
+    $effect(() => {
+      // Load form data from local storage on mount
       const storedData = browser ? localStorage.getItem('formData') : null;
       if (storedData) {
         console.log('Hydrating form data to local storage:', storedData);
