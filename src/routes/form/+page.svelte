@@ -1,81 +1,29 @@
 <script lang="ts">
-    import { browser } from '$app/environment';
     import TextInput from '../../components/TextInput.svelte';
     import Checkbox from '../../components/Checkbox.svelte';
     import RadioButton from '../../components/RadioButton.svelte';
     import Select from '../../components/Select.svelte';
     import TextArea from '../../components/TextArea.svelte';
-    
-    interface FormData {
-      name: string;
-      email: string;
-      password: string;
-      acceptTerms: boolean;
-      gender: string;
-      country: string;
-      bio: string;
-    }
-  
-    const defaultFormData: FormData = {
-      name: '',
-      email: '',
-      password: '',
-      acceptTerms: false,
-      gender: '',
-      country: '',
-      bio: ''
-    };
-    
-    // Declare state (rune)
-    let formData = $state<FormData>({ ...defaultFormData });
-    
-    // $derived state (rune)
-    const formDataString = $derived<string>(JSON.stringify(formData));
-    
-    // onMount $effect (rune)
-    $effect(() => {
-      // Load form data from local storage on mount
-      const storedData = browser ? localStorage.getItem('formData') : null;
-      if (storedData) {
-        formData = JSON.parse(storedData);
-      }
-    });
-
-    // $effect - when formDataString changes, persist form data to local storage
-    $effect(() => {
-      if (browser) {
-        const defaultFormDataString = JSON.stringify(defaultFormData);
-        const previousFormDataString = browser ? localStorage.getItem('formData') : '';
-        if (![defaultFormDataString, previousFormDataString].includes(formDataString)) {
-          console.log('persisting form data to local storage');
-          localStorage.setItem('formData', formDataString);
-        }
-      }
-    });
-  
-    function handleReset(event: any) {
-      formData = { ...defaultFormData };
-      localStorage.removeItem('formData');
-    }
+	  import { useSignUpForm } from './useSignUpForm.svelte';
+    const form = useSignUpForm()
 
     function handleChange(event: any) {
       const { name, value, checked } = event.detail;
-      formData = {
-        ...formData,
+      form.set({
         [name]: value !== undefined ? value : checked
-      };
+      });
     }
   </script>
   
   <h1>Example Form</h1>
   
   <form on:submit|preventDefault>
-    {#if formData}
+    {#if form}
       <!-- Name -->
       <TextInput
         label="Name"
         name="name"
-        value={formData.name}
+        value={form.value.name}
         on:change={handleChange}
       />
 
@@ -83,7 +31,7 @@
       <TextInput
         label="Email"
         name="email"
-        value={formData.email}
+        value={form.value.email}
         on:change={handleChange}
       />
 
@@ -91,7 +39,7 @@
       <TextInput
         label="Password"
         name="password"
-        value={formData.password}
+        value={form.value.password}
         on:change={handleChange}
       />
 
@@ -102,21 +50,21 @@
           label="Male"
           name="gender"
           value="male"
-          groupValue={formData.gender}
+          groupValue={form.value.gender}
           on:change={handleChange}
         />
         <RadioButton
           label="Female"
           name="gender"
           value="female"
-          groupValue={formData.gender}
+          groupValue={form.value.gender}
           on:change={handleChange}
         />
         <RadioButton
           label="Other"
           name="gender"
           value="other"
-          groupValue={formData.gender}
+          groupValue={form.value.gender}
           on:change={handleChange}
         />
       </fieldset>
@@ -132,7 +80,7 @@
           { value: 'uk', text: 'United Kingdom' },
           { value: 'au', text: 'Australia' }
         ]}
-        selectedValue={formData.country}
+        selectedValue={form.value.country}
         on:change={handleChange}
       />
 
@@ -140,7 +88,7 @@
       <TextArea
         label="Bio"
         name="bio"
-        value={formData.bio}
+        value={form.value.bio}
         on:change={handleChange}
       />
 
@@ -148,14 +96,15 @@
       <Checkbox
         label="Accept Terms and Conditions"
         name="acceptTerms"
-        checked={formData.acceptTerms}
+        checked={form.value.acceptTerms}
         on:change={handleChange}
       />
 
 
       <div class="buttons">
         <!-- Reset Button -->
-        <button type="button" on:click={handleReset}>Reset</button>
+        checked={form.value.acceptTerms}
+        <button type="button" on:click={form.reset}>Reset</button>
         <!-- Submit Button -->
         <button type="submit">Submit</button>
       </div>
@@ -163,7 +112,7 @@
   </form>
   
   <!-- Display Form Data -->
-  <pre>{JSON.stringify(formData, null, 2)}</pre>
+  <pre>{JSON.stringify(form.value, null, 2)}</pre>
   
 
   <style>
