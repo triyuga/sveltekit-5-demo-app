@@ -1,4 +1,4 @@
-import { browser } from '$app/environment';
+import { useStorage } from '../../hooks/useStorage';
 
 interface SignupForm {
   name: string;
@@ -21,42 +21,18 @@ const defaultFormData: SignupForm = {
 };
 
 export const useSignUpForm = () => {
+    const storage = useStorage<SignupForm>('formData', defaultFormData);
     let value = $state<SignupForm>({ ...defaultFormData });
     
-    // $derived state (rune)
-    const formDataString = $derived<string>(JSON.stringify(value))
+    // $effect onMount (rune)
+    $effect(() => value = storage.get());
 
-    // onMount $effect (rune)
-    $effect(() => {
-        // Load form data from local storage on mount
-        const storedData = browser ? localStorage.getItem('formData') : null;
-        if (storedData) {
-          value = JSON.parse(storedData);
-        }
-    });
-
-    // $effect - when formDataString changes, persist form data to local storage
-    $effect(() => {
-        if (browser) {
-          const defaultFormDataString = JSON.stringify(defaultFormData);
-          const previousFormDataString = browser ? localStorage.getItem('formData') : '';
-          if (![defaultFormDataString, previousFormDataString].includes(formDataString)) {
-            localStorage.setItem('formData', formDataString);
-          }
-        }
-    });
-
-    function resetFormData () {
-        value = { ...defaultFormData };
-    }
-
-    function setFormData (newFormData: Partial<SignupForm>) {
-      value = {...value, ...newFormData};
-    }
+    // $effect - when value changes, persist to storage
+    $effect(() => storage.set(value));
 
     return {
         get value() { return value },
-        set: setFormData,
-        reset: resetFormData
+        set(newFormData: Partial<SignupForm>) { value = {...value, ...newFormData} },
+        reset() { value = { ...defaultFormData } }
     };
 }
