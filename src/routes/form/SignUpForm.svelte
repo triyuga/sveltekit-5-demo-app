@@ -12,6 +12,7 @@
 	} from '../../domain/models';
 	import { useStorage } from '../../hooks/useStorage';
 	import { validateSignUpForm } from '../../domain/validation';
+	import DebugBlocks from '../../components/DebugBlocks.svelte';
 	const storage = useStorage<SignUpForm>(signUpFormKey, defaultSignUpForm);
 
 	let formState = $state<SignUpForm>({ ...defaultSignUpForm });
@@ -78,8 +79,9 @@
 	</div>
 </form>
 
-<!-- Display formState & formErrors -->
-<h2>formState</h2>
-<pre>{JSON.stringify(formState, null, 2)}</pre>
-<h2>formErrors</h2>
-<pre>{JSON.stringify(formErrors, null, 2)}</pre>
+<DebugBlocks
+	blocks={[
+		{ label: 'formState', value: JSON.stringify(formState, null, 2) },
+		{ label: 'formErrors', value: JSON.stringify(formErrors, null, 2) }
+	]}
+/>
