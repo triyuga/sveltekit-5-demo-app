@@ -11,43 +11,19 @@
 		type SignUpFormErrors
 	} from '../../domain/models';
 	import { useStorage } from '../../hooks/useStorage';
-
+	import { validateSignUpForm } from '../../domain/validation';
 	const storage = useStorage<SignUpForm>(signUpFormKey, defaultSignUpForm);
+
 	let formState = $state<SignUpForm>({ ...defaultSignUpForm });
-	let formErrors = $derived<SignUpFormErrors>(validateForm());
+	const formErrors = $derived<SignUpFormErrors>(validateSignUpForm(formState));
 
-	function validateStringRequired(value: string): string {
-		return value ? '' : 'required';
-	}
-	function validateBooleanRequired(value: boolean): string {
-		return value ? '' : 'required';
-	}
-
-	function validateForm(): SignUpFormErrors {
-		const errors: SignUpFormErrors = {
-			name: validateStringRequired(formState.name),
-			email: validateStringRequired(formState.email),
-			password: validateStringRequired(formState.password),
-			acceptTerms: validateBooleanRequired(formState.acceptTerms),
-			gender: validateStringRequired(formState.gender),
-			country: validateStringRequired(formState.country),
-			bio: validateStringRequired(formState.bio)
-		};
-		// filter errors, remove key+value where is empty string
-		const filteredErrors = Object.fromEntries(
-			Object.entries(errors).filter(([_, value]) => value !== '')
-		);
-		return filteredErrors;
-	}
-	// $effect onMount (rune)
+	// hydrate onMount
 	$effect(() => {
 		formState = { ...defaultSignUpForm, ...storage.get() };
 	});
 
-	// $effect - when value changes, persist to storage
+	// when value changes, persist to storage
 	$effect(() => storage.set(formState));
-
-	// $effect(() => storage.set(formState));
 
 	function handleReset() {
 		formState = defaultSignUpForm;
