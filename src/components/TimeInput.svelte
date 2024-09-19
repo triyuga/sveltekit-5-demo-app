@@ -1,16 +1,16 @@
 <script lang="ts">
 	import FieldHeader from './FieldHeader.svelte';
 
-	interface TextAreaProps {
+	interface TimeInputProps {
 		label: string;
 		value: string;
 		error?: string;
-		required?: boolean;
 	}
-	let { label, value = $bindable(), error }: TextAreaProps = $props();
+
+	let { label = '', value = $bindable(''), error }: TimeInputProps = $props();
 </script>
 
 <label>
 	<FieldHeader {label} {error} />
-	<textarea bind:value></textarea>
+	<input type="time" bind:value />
 </label>

@@ -1,38 +1,16 @@
 <script lang="ts">
-  interface TextInputProps {
-    label: string;
-    value: string;
-    name: string;
-    onChange: (value: string) => void;
-  }
+	import FieldHeader from './FieldHeader.svelte';
 
-  let {label = '', value = '', name = '', onChange}: TextInputProps = $props();
+	interface TextInputProps {
+		label: string;
+		value: string;
+		error?: string;
+	}
 
-  function handleInput(event: Event) {
-    const value = (event.target as HTMLInputElement).value
-    onChange(value)
-  }
+	let { label = '', value = $bindable(''), error }: TextInputProps = $props();
 </script>
 
 <label>
-  {label}
-  <input name={name} type="text" bind:value oninput={handleInput} />
+	<FieldHeader {label} {error} />
+	<input type="text" bind:value />
 </label>
-
-<style>
-  label {
-    display: flex;
-    flex-direction: column;
-    font-weight: bold;
-    gap: 0.5rem;
-  }
-  input[type="text"] {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  input:focus {
-    border-color: #0070f3;
-    outline: none;
-  }
-</style>
