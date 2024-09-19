@@ -1,10 +1,21 @@
 {
-    "workbench.editor.customLabels.patterns": {
-        "**/+layout.*": "${dirname}/${filename}.${extname}",
-        "**/+page.*": "${dirname}/${filename}.${extname}",
-        "**/+server.*": "${dirname}/${filename}.${extname}",
-        "**/routes/+layout.*": "home/${filename}.${extname}",
-        "**/routes/+page.*": "home/${filename}.${extname}",
-        "**/routes/+server.*": "home/${filename}.${extname}",
-    },
+	"workbench.editor.customLabels.patterns": {
+		"**/+layout.*": "${dirname}/${filename}.${extname}",
+		"**/+page.*": "${dirname}/${filename}.${extname}",
+		"**/+server.*": "${dirname}/${filename}.${extname}",
+		"**/routes/+layout.*": "home/${filename}.${extname}",
+		"**/routes/+page.*": "home/${filename}.${extname}",
+		"**/routes/+server.*": "home/${filename}.${extname}"
+	},
+	"editor.renderWhitespace": "boundary",
+	"editor.tabCompletion": "on",
+	"editor.tabSize": 4,
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[markdown]": {
+		"editor.formatOnSave": false
+	},
+	"[json]": {
+		"editor.formatOnSave": false
+	}
 }
