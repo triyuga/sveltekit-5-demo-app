@@ -1,9 +1,9 @@
 import type {
 	SignUpForm,
 	SignUpFormErrors,
-	TypesOfDeathForm,
-	TypesOfDeathFormErrors
-} from './models';
+	TypesOfDeathData,
+	TypesOfDeathErrors
+} from '../lib/models'
 
 export function validateSignUpForm(formState: SignUpForm): SignUpFormErrors {
 	const errors: SignUpFormErrors = {
@@ -14,16 +14,18 @@ export function validateSignUpForm(formState: SignUpForm): SignUpFormErrors {
 		gender: validateStringRequired(formState.gender),
 		country: validateStringRequired(formState.country),
 		bio: validateStringRequired(formState.bio)
-	};
+	}
 	// filter errors, remove key+value where is empty string
 	const filteredErrors = Object.fromEntries(
 		Object.entries(errors).filter(([_, value]) => value !== '')
-	);
-	return filteredErrors;
+	)
+	return filteredErrors
 }
 
-export function validateTypesOfDeathForm(formState: TypesOfDeathForm): TypesOfDeathFormErrors {
-	const errors: TypesOfDeathFormErrors = {
+export function validateTypesOfDeathData(
+	formState: TypesOfDeathData
+): TypesOfDeathErrors {
+	const errors: TypesOfDeathErrors = {
 		officerName: validateStringRequired(formState.officerName),
 		badgeNumber: validateStringRequired(formState.badgeNumber),
 		date: validateStringRequired(formState.date),
@@ -32,22 +34,22 @@ export function validateTypesOfDeathForm(formState: TypesOfDeathForm): TypesOfDe
 		description: validateStringRequired(formState.description),
 		typesOfDeath: validateArrayNotEmpty(formState.typesOfDeath),
 		incidentSeverity: validateStringRequired(formState.incidentSeverity)
-	};
+	}
 	// filter errors, remove key+value where is empty string
 	const filteredErrors = Object.fromEntries(
 		Object.entries(errors).filter(([_, value]) => value !== '')
-	);
-	return filteredErrors;
+	)
+	return filteredErrors
 }
 
 function validateStringRequired(value: string): string {
-	return value ? '' : 'required';
+	return value ? '' : 'required'
 }
 
 function validateBooleanRequired(value: boolean): string {
-	return value ? '' : 'required';
+	return value ? '' : 'required'
 }
 
 function validateArrayNotEmpty(value: string[]): string {
-	return value.filter(Boolean).length > 0 ? '' : 'required';
+	return value.filter(Boolean).length > 0 ? '' : 'required'
 }

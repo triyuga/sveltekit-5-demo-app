@@ -10,9 +10,9 @@
 	import TimeInput from '$lib/components/TimeInput.svelte'
 	import Checkboxes from '$lib/components/Checkboxes.svelte'
 	import Radios from '$lib/components/Radios.svelte'
-	import { validateTypesOfDeathData } from '../../lib/validation/validation.ts'
 	import DebugBlocks from '$lib/components/DebugBlocks.svelte'
-	import { createDeathReportService } from '../../lib/services/deathReportService.ts'
+	import { createDeathReportService } from '$lib/services/deathReportService.ts'
+	import { validateTypesOfDeathData } from '$lib/validation/validation'
 	const deathReportService = createDeathReportService()
 
 	const id = '123' // TODO: get from route params

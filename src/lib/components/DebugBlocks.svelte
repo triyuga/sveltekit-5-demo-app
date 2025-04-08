@@ -1,11 +1,11 @@
 <script lang="ts">
 	interface DebugBlocksProps {
 		blocks: {
-			label: string;
-			value: string;
-		}[];
+			label: string
+			value: string
+		}[]
 	}
-	const { blocks }: DebugBlocksProps = $props();
+	const { blocks }: DebugBlocksProps = $props()
 </script>
 
 <div class="debug-blocks">
@@ -21,9 +21,11 @@
 	.debug-blocks {
 		display: flex;
 		flex-direction: row;
+		gap: 1rem;
 	}
 	.debug-block {
 		display: flex;
 		flex-direction: column;
+		gap: 0.5rem;
 	}
 </style>

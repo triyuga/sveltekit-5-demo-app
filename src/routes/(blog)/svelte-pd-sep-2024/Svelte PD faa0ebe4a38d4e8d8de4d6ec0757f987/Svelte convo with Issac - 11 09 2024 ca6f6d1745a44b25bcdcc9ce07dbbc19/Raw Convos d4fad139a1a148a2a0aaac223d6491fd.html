@@ -1,0 +1,685 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Raw Convos</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 237, 214, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 237, 214, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(249, 228, 188, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d4fad139-a1a1-48a2-a0aa-ac223d6491fd" class="page sans"><header><h1 class="page-title">Raw Convos</h1><p class="page-description"></p></header><div class="page-body"><p id="8af5305f-af9a-4151-84a8-c9a0549fcc6a" class="">
+</p><p id="b9fa9430-5405-435f-8db5-31599e267dc0" class="">Tim</p><p id="e87d016e-9c4b-4ff9-b189-63f27b7f9554" class="">Tim</p><p id="334a4fd1-0d48-4e63-a54c-cffdb6e79cbb" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726013115507289">10:05 AM</a></p><p id="203c460a-98b4-4eb2-8487-b7d3e04a8dc5" class="">Were you looking more at Svelte 4 or 5?</p><figure id="3441eac8-6c98-4be2-a27f-eaec2c6a855e" class="image"><a href="https://ca.slack-edge.com/T02CV8783-USM4X2490-6e671c840157-48"><img style="width:36px" src="https://ca.slack-edge.com/T02CV8783-USM4X2490-6e671c840157-48"/></a></figure><p id="ccd37a4d-7e03-4482-b71d-7e0e3e673949" class="">Isaac</p><p id="edee86cc-84c5-42d0-b958-2144f7699aaf" class="">Isaac</p><p id="da903572-260c-400f-bb27-609cf9d5f5e7" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726013418940669">10:10 AM</a></p><p id="7a8136e4-52a1-4c9a-94b4-42a3579dc444" class="">Svelte 5, although it&#x27;s been lingering in release candidate for longer than I&#x27;d like. I did start with Svelte 4, but it wasn&#x27;t until 5 that the &quot;this is <em>nice</em>&quot; really clicked for me</p><figure id="e781a959-1ef6-473c-9e34-fa4e7ebb17c4" class="image"><a href="https://ca.slack-edge.com/T02CV8783-UJE4VUDSS-3cb65206f0a8-48"><img style="width:36px" src="https://ca.slack-edge.com/T02CV8783-UJE4VUDSS-3cb65206f0a8-48"/></a></figure><p id="56875677-6d99-4f4e-a303-c0d740ea1cac" class="">Tim</p><p id="4a7a6bb6-70a0-42bb-8dc0-ae0f584fe9bd" class="">Tim</p><p id="79386e0f-3ec0-4414-82ec-31ba5d0ee661" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726014611839449">10:30 AM</a></p><p id="f59a58df-d415-4cbd-b21d-ced3b1de6b45" class="">Yeah Svelte 5 looks really nice, but yeah all I can find about release date is &quot;when it&#x27;s ready&quot;</p><figure id="47ba49e1-6e8c-4230-bdcd-046c471d11a4" class="image"><a href="https://ca.slack-edge.com/T02CV8783-USM4X2490-6e671c840157-48"><img style="width:36px" src="https://ca.slack-edge.com/T02CV8783-USM4X2490-6e671c840157-48"/></a></figure><p id="e9714ab0-8237-4e6d-a584-3429b6f61781" class="">Isaac</p><p id="2799fee8-8693-4cd1-a3fe-640e25343a82" class="">Isaac</p><p id="41f78de0-b0da-475a-87d4-f2030c535c95" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726014713377869">10:31 AM</a></p><p id="34a46538-3e43-4fbe-a339-67f11caf269a" class="">This gives a bit more of a granular overview, but there&#x27;s nothing stopping them adding more empty boxes lol: <a href="https://svelte-5-preview.vercel.app/status">https://svelte-5-preview.vercel.app/status</a></p><figure id="f8b62d24-efa5-493e-8969-2df0e0da3e41" class="image"><a href="https://ca.slack-edge.com/T02CV8783-UJE4VUDSS-3cb65206f0a8-48"><img style="width:36px" src="https://ca.slack-edge.com/T02CV8783-UJE4VUDSS-3cb65206f0a8-48"/></a></figure><p id="15126c46-a34c-49f0-802c-6796a63fabc3" class="">Tim</p><p id="c1020dd2-ed7a-4f4c-a3ef-9144462c5cb3" class="">Tim</p><p id="28800cf5-cc21-412d-8656-9e54fb3b9d3f" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726014794986999">10:33 AM</a></p><p id="f5d24233-3671-49d5-bab6-1c10811c2849" class="">Ok it&#x27;s mostly green, so maybe this year / early next year</p><figure id="9e78e492-d8a9-4be4-b999-819e38f32237" class="image"><a href="https://ca.slack-edge.com/T02CV8783-USM4X2490-6e671c840157-48"><img style="width:36px" src="https://ca.slack-edge.com/T02CV8783-USM4X2490-6e671c840157-48"/></a></figure><p id="c3684659-4692-4784-8c93-0787099f03f8" class="">Isaac</p><p id="4eb96bd5-4028-4050-b6dc-5d2a0e2e56cd" class="">Isaac</p><p id="09293f5b-847c-41dc-a04b-22775bae190a" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726014863151599">10:34 AM</a></p><p id="8eb82b41-74e5-48ef-a95d-5b2abaf8281c" class="">And to that point, I wouldn&#x27;t use it in production for any client work (guessing it&#x27;d still be a hard sell even if fully released) but it&#x27;s certainly felt more than stable enough for personal project stuff</p><p id="71f14db5-c7ec-4166-b50e-7dc7be1490cd" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726014889075289">10:34</a></p><p id="27a478e0-b791-48bf-a811-3c53f1f8ee36" class="">Isaac</p><p id="2aed27b6-ddfd-4963-8287-21bd3b2ea348" class="">Most people online seem to feel similarly about it, generally just recommend staying away from any super-new features</p><figure id="69059b13-7335-4d6b-9392-3f3734bd011e" class="image"><a href="https://ca.slack-edge.com/T02CV8783-UJE4VUDSS-3cb65206f0a8-48"><img style="width:36px" src="https://ca.slack-edge.com/T02CV8783-UJE4VUDSS-3cb65206f0a8-48"/></a></figure><p id="5007d8e9-4cc4-4b61-82a8-d4ecee229efb" class="">Tim</p><p id="88694533-055d-4dc8-bcad-df78ec7a5f79" class="">Tim</p><p id="a1b94c5f-afe6-4f53-b0d4-1f6ba6a5ac36" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726014890529069">10:34 AM</a></p><p id="8d25b22d-f675-4478-839f-49966bcc1029" class="">I saw people complaining that v5 is getting more like React, but it also seems like it plugs some of the few remaining short-comings and really makes ready for primetime.</p><p id="a07c3696-8671-428a-a713-cc52c92ce81f" class="">💯1</p><p id="6f6eab65-1454-4cb2-ac4a-e92d2df9fc01" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726014953380519">10:35</a></p><p id="3a60de42-2935-4561-bd44-bfa8a514cb8c" class="">Tim</p><p id="4cbc9bcd-b5cb-40dd-9936-d76e80c0fc9a" class="">I reckon it would be ok for some client work TBH</p><figure id="ae784fb4-3d74-4b7f-8e16-220a9d685985" class="image"><a href="https://ca.slack-edge.com/T02CV8783-USM4X2490-6e671c840157-48"><img style="width:36px" src="https://ca.slack-edge.com/T02CV8783-USM4X2490-6e671c840157-48"/></a></figure><p id="8b4171ee-ce39-4c47-807b-971b5ec47565" class="">Isaac</p><p id="a5250494-173d-4709-aefc-d478562b35b7" class="">Isaac</p><p id="6dd59302-b322-47e5-8a1d-415aa8d323ad" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726014964168419">10:36 AM</a></p><p id="f814a3dd-7b17-4a07-82e9-eaa506efbbf6" class="">Yeah the initial reactions were all &quot;I hate React, don&#x27;t make it more like that&quot; but in my mind it painted Svelte as being mature enough to realise what was good about another framework and adopt that. More importantly in my mind, it can make it much easier to sell it to React devs, and makes moving across <em>much</em> easier</p><p id="467c0faa-ba14-4bba-ba49-6aecbe69abc8" class="">👍1</p><figure id="d788e48d-10be-4d65-a0c0-fe20ba6d53bf" class="image"><a href="https://ca.slack-edge.com/T02CV8783-UJE4VUDSS-3cb65206f0a8-48"><img style="width:36px" src="https://ca.slack-edge.com/T02CV8783-UJE4VUDSS-3cb65206f0a8-48"/></a></figure><p id="8abd8220-57a1-4495-b236-8feea62f26ea" class="">Tim</p><p id="e95bdf68-009c-4101-8ac4-cc92f460ff33" class="">Tim</p><p id="24c22204-71d6-4fb0-907d-2eb467c5408e" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726014974584249">10:36 AM</a></p><p id="20a43a80-3ca0-4ab3-a3b9-c6a74d256576" class="">Maybe nothing huge or high risk, but it seems v solid</p><p id="437d180f-c255-4972-b5cc-526a99e1139c" class="">👍1</p><figure id="c585a97f-1fe0-4dbd-9c3c-ac3e4cb00f65" class="image"><a href="https://ca.slack-edge.com/T02CV8783-USM4X2490-6e671c840157-48"><img style="width:36px" src="https://ca.slack-edge.com/T02CV8783-USM4X2490-6e671c840157-48"/></a></figure><p id="0fcbf12d-caaf-4928-9b20-772d372e5487" class="">Isaac</p><p id="de144a17-32d6-439f-aa66-2f2c3dde1cf9" class="">Isaac</p><p id="3b91ca8d-49a8-4b6f-9524-8f1d8b4ada2f" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726015128363419">10:38 AM</a></p><p id="aabd6fe3-ee68-4b66-a72c-8fbc5da057e8" class="">I&#x27;d certainly reach for it over Blazor, and I&#x27;ve used Blazor on 3 projects now, I think? Perfect client opportunities would likely be little to no tech capability themselves as they might otherwise prefer their own stack, and perhaps a small sliver of functionality like a simple admin interface</p><p id="89af6efe-27e0-4427-912f-02e016d9e23b" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726015221516269">10:40</a></p><p id="e2e57e17-cce1-4b46-b6db-f855f6c0ed13" class="">Isaac</p><p id="3520d547-bd24-41e8-b078-5d5059e4649f" class="">The other possibility, although it introduces another framework, is Astro, which can inject components from different frameworks into a single app. Have always thought it&#x27;d be a great way to migrate from Angular to React etc., without taking it offline you could just wrap the existing app in Astro, and start moving the state management slowly into Astro itself and functionality into React/Svelte/etc.</p><p id="57e6e085-b861-4789-a538-250b91880793" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726015304732059">10:41</a></p><p id="7906cd68-a8ac-4e76-b8ce-9384c516b51d" class="">Isaac</p><p id="7ca6641e-6560-4bdc-afde-c2ff3b8a8b3d" class="">But in this case it could be a great way to introduce another framework without being entirely dependent on it. Easy enough to say &quot;let&#x27;s use Svelte for this part&quot; and if it&#x27;s just a no-go it just requires that part to be written as a React component. Takes away a huge amount of the risk involved in choosing a less prominent framework</p><figure id="0cebe88e-5a0d-4755-ab41-122f78430637" class="image"><a href="https://ca.slack-edge.com/T02CV8783-UJE4VUDSS-3cb65206f0a8-48"><img style="width:36px" src="https://ca.slack-edge.com/T02CV8783-UJE4VUDSS-3cb65206f0a8-48"/></a></figure><p id="ed04a7f7-ff58-45de-83a6-f064e7aa7cca" class="">Tim</p><p id="a61078ae-fecd-42d6-b752-45310f42af96" class="">Tim</p><p id="0f419505-f6c9-4c1d-a292-0acdd46132bc" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726015583959459">10:46 AM</a></p><p id="6d07d486-feeb-4265-9818-113bb5f89779" class="">It&#x27;s not too intimidating to learn, certainly more simple than React. And with Svelte 5 providing equivalents for the most common concepts/feats in React, I don&#x27;t think it&#x27;s much of a stretch for devs to transition to. I want through the Basic sections of this yesterday and felt like it gave me an excellent overview in an efficient format: <a href="https://learn.svelte.dev/tutorial/welcome-to-svelte">https://learn.svelte.dev/tutorial/welcome-to-svelte</a> (edited)</p><figure id="1f5e0ad5-3296-4130-8e16-76bb6c6989bb" class="image"><a href="https://slack-imgs.com/?c=1&amp;o1=wi32.he32.si&amp;url=https%3A%2F%2Flearn.svelte.dev%2Ffavicon.png"><img style="width:16px" src="https://slack-imgs.com/?c=1&amp;o1=wi32.he32.si&amp;url=https%3A%2F%2Flearn.svelte.dev%2Ffavicon.png"/></a></figure><p id="cc60d232-0a95-45de-bbc5-74c996abc170" class="">learn.svelte.dev</p><p id="3fe50f1f-2fc8-4725-805a-546ff6d75507" class=""><a href="https://learn.svelte.dev/tutorial/welcome-to-svelte">Welcome to Svelte • Svelte Tutorial</a></p><p id="2172b4a2-6b69-4717-89bf-d45ea3b2dc21" class="">Learn Svelte and SvelteKit with an interactive browser-based tutorial</p><p id="37d82c92-233f-4d26-a5b7-9245945cb242" class="">👍1</p><p id="d79b5447-67dc-4ff6-bbec-a40dded860f2" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726015606707889">10:46</a></p><p id="1c8ec5a3-7eb3-4334-bf41-144f49a2a0a3" class="">Tim</p><p id="61eb3778-89ca-410a-8a17-825448450e62" class="">It&#x27;s Svelte 4, but I assume there is v5 version in the works.</p><figure id="8e7c2f38-b2ff-49bc-8375-6cdea6e4d753" class="image"><a href="https://ca.slack-edge.com/T02CV8783-USM4X2490-6e671c840157-48"><img style="width:36px" src="https://ca.slack-edge.com/T02CV8783-USM4X2490-6e671c840157-48"/></a></figure><p id="33b717df-de31-4d81-93aa-1b07a853c762" class="">Isaac</p><p id="f4891af2-6a3e-488e-82a7-6b3b9fba0389" class="">Isaac</p><p id="c158dc8a-f9a5-4d9b-994b-3b2a23f1e92c" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726016127963159">10:55 AM</a></p><p id="20344e96-a092-439b-881e-be6af638132b" class="">Might be a nice way to quickly get one&#x27;s head around Svelte 4 -&gt; 5<a href="https://component-party.dev/compare/svelte4-vs-svelte5">https://component-party.dev/compare/svelte4-vs-svelte5</a></p><p id="f06a9357-4b2b-4e8f-bfff-64a7d17e019a" class="">❤️1</p><p id="1ef00226-9d38-4270-b7ed-33660a71f0f6" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726016163474869">10:56</a></p><p id="ae74987f-ae9f-4126-9935-af8580b7a681" class="">Isaac</p><p id="2dbd9441-f5c7-476d-ad36-06c378cd9d85" class="">But yeah, Svelte 5 had that feel about it - just enough to be familiar, while doing things in a really nice, ergonomic way</p><p id="c1bcb3bb-4c54-46dc-ae9f-4603428aa875" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726016192468509">10:56</a></p><p id="f2fc976e-09fc-422d-afb5-6648fc19f08e" class="">Isaac</p><p id="9b9f0b4e-4c4e-4d8f-ae29-9a991c0c6e70" class="">I would describe Svelte 4 to be more like React + MobX State Tree, with the way they use stores etc.</p><figure id="bd704e0f-4190-44e0-90b0-d638ba1e5882" class="image"><a href="https://ca.slack-edge.com/T02CV8783-UJE4VUDSS-3cb65206f0a8-48"><img style="width:36px" src="https://ca.slack-edge.com/T02CV8783-UJE4VUDSS-3cb65206f0a8-48"/></a></figure><p id="46c36b17-31de-4fbf-bbb6-8e661e0cc7a6" class="">Tim</p><p id="5547d734-07e0-4208-823d-bac8eead5c91" class="">Tim</p><p id="270421d2-6484-4805-b244-9cfb4a0c29b4" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726029103236029">2:31 PM</a></p><p id="22c65c93-4685-497e-9d20-d881441e5792" class="">This Astro? <a href="https://astro.build/">https://astro.build/</a></p><p id="129e4487-4c2f-46c1-8b23-0ed2f2b8d950" class="">astro.build</p><p id="1c0a42d0-f171-4791-9a30-ace89843ba4a" class=""><a href="https://astro.build/">Astro</a></p><p id="70e83641-1609-41bf-8341-858b730c4ac1" class="">Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between. (756 kB)</p><p id="c785df4f-1681-4601-b61d-fa836e8ecfd9" class=""><a href="https://astro.build/">https://astro.build/</a></p><figure id="bf13c5e7-0cc0-4cf6-a9ef-6bae566e3839" class="image"><a href="https://ca.slack-edge.com/T02CV8783-USM4X2490-6e671c840157-48"><img style="width:36px" src="https://ca.slack-edge.com/T02CV8783-USM4X2490-6e671c840157-48"/></a></figure><p id="316ea5f3-8038-474e-872e-fb83971e5612" class="">Isaac</p><p id="0e610905-92af-4135-b30c-22ea76aee69f" class="">Isaac</p><p id="27bc7ebb-1001-4d6f-b317-4a3af5c7ae02" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726029770992349">2:42 PM</a></p><p id="a78affe1-d01e-4a3f-b448-5c1bfd378b91" class="">Yep, specifically their &quot;islands&quot; feature: <a href="https://docs.astro.build/en/concepts/islands/">https://docs.astro.build/en/concepts/islands/</a></p><p id="6f7a2617-921b-436b-98c8-99e367092d78" class="">👍1</p><p id="1613825c-2942-4477-b48a-7562801f3b78" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726029804042599">2:43</a></p><p id="189169a7-b8bf-48ad-b46e-1438d59181c2" class="">Isaac</p><p id="e3738c46-1a54-4fb1-a0e3-e95ff3b1cb12" class="">I&#x27;ve only toyed with them/Astro briefly, but the concept appealed to me</p><p id="56abd491-6b3f-4e33-93c5-380f4bb10b42" class=""><a href="https://purple-sunshine-squad.slack.com/archives/D02B8GPKXJL/p1726030062450709">2:47</a></p><p id="fff5228f-8623-478d-b3fc-cd14533272cb" class="">Isaac</p><p id="c9d6d533-2e96-4fc8-92cb-f294e51f3928" class="">Just pushed up a tiny sample where I&#x27;ve used a React + Svelte counter component using shared state managed in Astro: <a href="https://github.com/vivecuervo7/astro-sample-web-app">https://github.com/vivecuervo7/astro-sample-web-app</a></p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

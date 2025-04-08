@@ -1,0 +1,27 @@
+{
+  "users": [],
+  "deathReports": [
+    {
+      "id": "1",
+      "officerName": "Bob",
+      "badgeNumber": "1234",
+      "date": null,
+      "time": null,
+      "location": null,
+      "description": null,
+      "typesOfDeath": [],
+      "incidentSeverity": null
+    },
+    {
+      "id": "3cfb0507-2988-4ed9-bea1-b1603d50af5f",
+      "officerName": "Jack",
+      "badgeNumber": "123",
+      "date": null,
+      "time": null,
+      "location": null,
+      "description": null,
+      "typesOfDeath": [],
+      "incidentSeverity": null
+    }
+  ]
+}

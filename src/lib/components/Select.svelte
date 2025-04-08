@@ -13,7 +13,7 @@
 
 <label>
 	<FieldHeader {label} {error} />
-	<select bind:value>
+	<select bind:value placeholder="Select">
 		{#each options as option}
 			<option value={option.value}>{option.text}</option>
 		{/each}

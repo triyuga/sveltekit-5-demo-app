@@ -1,87 +1,106 @@
 <script lang="ts">
-	import TextInput from '../../components/TextInput.svelte';
-	import Checkbox from '../../components/Checkbox.svelte';
-	import Select from '../../components/Select.svelte';
-	import TextArea from '../../components/TextArea.svelte';
-	import Radios from '../../components/Radios.svelte';
+	import TextInput from '$lib/components/TextInput.svelte'
+	import Checkbox from '$lib/components/Checkbox.svelte'
+	import Select from '$lib/components/Select.svelte'
+	import TextArea from '$lib/components/TextArea.svelte'
+	import Radios from '$lib/components/Radios.svelte'
 	import {
 		defaultSignUpForm,
 		signUpFormKey,
 		type SignUpForm,
 		type SignUpFormErrors
-	} from '../../domain/models';
-	import { useStorage } from '../../hooks/useStorage';
-	import { validateSignUpForm } from '../../domain/validation';
-	import DebugBlocks from '../../components/DebugBlocks.svelte';
-	const storage = useStorage<SignUpForm>(signUpFormKey, defaultSignUpForm);
+	} from '$lib/models'
+	import { useStorage } from '../../hooks/useStorage'
+	import { validateSignUpForm } from '../../lib/validation/validation'
+	import DebugBlocks from '$lib/components/DebugBlocks.svelte'
+	import { createUserService } from '../../lib/services/userService'
+	const userService = createUserService()
 
-	let formState = $state<SignUpForm>({ ...defaultSignUpForm });
-	const formErrors = $derived<SignUpFormErrors>(validateSignUpForm(formState));
+	// state
+	let isLoading = $state(true)
+	let formState = $state<SignUpForm>({ ...defaultSignUpForm })
+	const formErrors = $derived<SignUpFormErrors>(validateSignUpForm(formState))
 
 	// hydrate onMount
 	$effect(() => {
-		formState = { ...defaultSignUpForm, ...storage.get() };
-	});
+		userService.getSignUpForm().then((data) => {
+			formState = { ...formState, ...data }
+			isLoading = false
+		})
+	})
 
 	// when value changes, persist to storage
-	$effect(() => storage.set(formState));
+	$effect(() => {
+		userService.updateSignUpForm(formState)
+	})
 
 	function handleReset() {
-		formState = defaultSignUpForm;
+		formState = defaultSignUpForm
 	}
 </script>
 
-<h1>Sign Up Form</h1>
+<section>
+	<h1>Sign Up</h1>
+	<form>
+		<TextInput
+			label="Name"
+			bind:value={formState.name}
+			error={formErrors.name}
+		/>
 
-<form>
-	<TextInput label="Name" bind:value={formState.name} error={formErrors.name} />
+		<TextInput
+			label="Email"
+			bind:value={formState.email}
+			error={formErrors.email}
+		/>
 
-	<TextInput label="Email" bind:value={formState.email} error={formErrors.email} />
+		<TextInput
+			label="Password"
+			bind:value={formState.password}
+			error={formErrors.password}
+		/>
 
-	<TextInput label="Password" bind:value={formState.password} error={formErrors.password} />
+		<Radios
+			label={'Gender'}
+			options={[
+				{ value: 'male', text: 'Male' },
+				{ value: 'female', text: 'Female' },
+				{ value: 'other', text: 'Other' }
+			]}
+			bind:value={formState.gender}
+			error={formErrors.gender}
+		/>
 
-	<Radios
-		label={'Gender'}
-		options={[
-			{ value: 'male', text: 'Male' },
-			{ value: 'female', text: 'Female' },
-			{ value: 'other', text: 'Other' }
+		<Select
+			label="Country"
+			options={[
+				{ value: 'us', text: 'United States' },
+				{ value: 'ca', text: 'Canada' },
+				{ value: 'uk', text: 'United Kingdom' },
+				{ value: 'au', text: 'Australia' }
+			]}
+			bind:value={formState.country}
+			error={formErrors.country}
+		/>
+
+		<TextArea label="Bio" bind:value={formState.bio} error={formErrors.bio} />
+
+		<Checkbox
+			label="Accept Terms and Conditions"
+			bind:checked={formState.acceptTerms}
+			error={formErrors.acceptTerms}
+		/>
+
+		<div class="buttons-row">
+			<button type="button" onclick={handleReset}>Reset</button>
+			<button type="submit">Submit</button>
+		</div>
+	</form>
+
+	<DebugBlocks
+		blocks={[
+			{ label: 'formState', value: JSON.stringify(formState, null, 2) },
+			{ label: 'formErrors', value: JSON.stringify(formErrors, null, 2) }
 		]}
-		bind:value={formState.gender}
-		error={formErrors.gender}
 	/>
-
-	<Select
-		label="Country"
-		options={[
-			{ value: '', text: 'Select Country' },
-			{ value: 'us', text: 'United States' },
-			{ value: 'ca', text: 'Canada' },
-			{ value: 'uk', text: 'United Kingdom' },
-			{ value: 'au', text: 'Australia' }
-		]}
-		bind:value={formState.country}
-		error={formErrors.country}
-	/>
-
-	<TextArea label="Bio" bind:value={formState.bio} error={formErrors.bio} />
-
-	<Checkbox
-		label="Accept Terms and Conditions"
-		bind:checked={formState.acceptTerms}
-		error={formErrors.acceptTerms}
-	/>
-
-	<div class="buttons-row">
-		<button type="button" onclick={handleReset}>Reset</button>
-
-		<button type="submit">Submit</button>
-	</div>
-</form>
-
-<DebugBlocks
-	blocks={[
-		{ label: 'formState', value: JSON.stringify(formState, null, 2) },
-		{ label: 'formErrors', value: JSON.stringify(formErrors, null, 2) }
-	]}
-/>
+</section>
